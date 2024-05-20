@@ -1,20 +1,16 @@
 ﻿using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using PlaywrightDemoProject.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Reqnroll;
 
 namespace PlaywrightDemoProject.Pages
 {
     public class YourCartPage : PageTest
     {
-        CustomScenarioContext scenarioContext;
-        public YourCartPage(CustomScenarioContext customScenarioContext)
+        ScenarioContext scenarioContext;
+        public YourCartPage(ScenarioContext ScenarioContext)
         {
-            this.scenarioContext = customScenarioContext;
+            this.scenarioContext = ScenarioContext;
         }
         private IPage page = PlaywrightSettings.Page;
 
@@ -24,7 +20,7 @@ namespace PlaywrightDemoProject.Pages
         //methods
         public async void ValidatePriceOnCartPageIsSameAsProductsPage()
         {
-            await Expect(page.Locator(".inventory_item_price")).ToHaveTextAsync(scenarioContext.itemPrice);
+            await Expect(page.Locator(".inventory_item_price")).ToHaveTextAsync(scenarioContext["firstDisplayedItemPrice"].ToString());
         }
 
         public async void ClickOnCheckoutButton()

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Playwright;
 using Microsoft.Playwright.NUnit;
 using PlaywrightDemoProject.Helpers;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace PlaywrightDemoProject.Pages
 {
     public class ProductsPage : PageTest
     {
-        CustomScenarioContext scenarioContext;
-        public ProductsPage(CustomScenarioContext customScenarioContext)
+        ScenarioContext scenarioContext;
+        public ProductsPage(ScenarioContext scenarioContext)
         {
-            this.scenarioContext = customScenarioContext;
+            this.scenarioContext = scenarioContext;
         }
         private IPage page = PlaywrightSettings.Page;
 
@@ -23,15 +24,17 @@ namespace PlaywrightDemoProject.Pages
 
 
         //methods
-        public async void ClickOnFirstDispalyedProduct()
+        public async void ClickOnFirstDisplayedProduct()
         {
-            scenarioContext.itemPrice = await page.Locator("div.inventory_item_price").First.InnerTextAsync();
+            string itemPrice = await page.Locator("div.inventory_item_price").First.InnerTextAsync();
+            scenarioContext["firstDisplayedItemPrice"] = itemPrice;
+
             await page.Locator("//div[@class='inventory_item_description']//a").First.ClickAsync();
         }
 
-        public async void ValidatePriceOnProductDeatilsPageIsSameAsProductsPage()
+        public async void ValidatePriceOnProductDetailsPageIsSameAsProductsPage()
         {
-            await Expect(page.Locator("div.inventory_details_price")).ToHaveTextAsync(scenarioContext.itemPrice);
+            await Expect(page.Locator("div.inventory_details_price")).ToHaveTextAsync(scenarioContext["firstDisplayedItemPrice"].ToString());
         }
 
         public async void ClickOnAddToCartButton()

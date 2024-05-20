@@ -7,18 +7,18 @@ namespace PlaywrightDemoProject.StepDefinitions
     [Binding]
     public class LoginStepDefinitions : PageTest
     {
-        CustomScenarioContext customScenarioContext;
+        ScenarioContext scenarioContext;
         LoginPage loginPage;
         ProductsPage productsPage;
         YourCartPage yourCartPage;
         CheckoutPage checkoutPage;
-        public LoginStepDefinitions(CustomScenarioContext customScenarioContext)
+        public LoginStepDefinitions(ScenarioContext scenarioContext)
         {
-            this.customScenarioContext = customScenarioContext;
-            loginPage = new LoginPage(customScenarioContext);
-            productsPage = new ProductsPage(customScenarioContext);
-            yourCartPage = new YourCartPage(customScenarioContext);
-            checkoutPage = new CheckoutPage(customScenarioContext);
+            this.scenarioContext = scenarioContext;
+            loginPage = new LoginPage(scenarioContext);
+            productsPage = new ProductsPage(scenarioContext);
+            yourCartPage = new YourCartPage(scenarioContext);
+            checkoutPage = new CheckoutPage(scenarioContext);
         }
         [Given(@"Launch the url")]
         public void GivenLaunchTheUrl()
@@ -50,13 +50,13 @@ namespace PlaywrightDemoProject.StepDefinitions
         [When(@"Select any item from list of products displayed")]
         public void WhenSelectAnyItemFromListOfProductsDisplayed()
         {
-            productsPage.ClickOnFirstDispalyedProduct();
+            productsPage.ClickOnFirstDisplayedProduct();
         }
 
         [Then(@"Validate price is dispalyed same as products page")]
         public void ThenValidatePriceIsDispalyedSameAsProductsPage()
         {
-            productsPage.ValidatePriceOnProductDeatilsPageIsSameAsProductsPage();
+            productsPage.ValidatePriceOnProductDetailsPageIsSameAsProductsPage();
         }
 
 

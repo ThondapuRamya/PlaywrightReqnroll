@@ -2,6 +2,7 @@
 using Microsoft.Playwright.NUnit;
 using PlaywrightDemoProject.Configurations;
 using PlaywrightDemoProject.Helpers;
+using Reqnroll;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,11 +14,11 @@ namespace PlaywrightDemoProject.Pages
 {
     public class LoginPage : PageTest
     {
-        CustomScenarioContext scenarioContext;
+        ScenarioContext scenarioContext;
 
-        public LoginPage(CustomScenarioContext customScenarioContext)
+        public LoginPage(ScenarioContext ScenarioContext)
         {
-            this.scenarioContext = customScenarioContext;
+            this.scenarioContext = ScenarioContext;
 
         }
         private IPage page = PlaywrightSettings.Page;
